@@ -12,7 +12,7 @@ import {
 import { useKhataStore } from "../store/useKhataStore";
 import { 
   TrendingUp, PieChart as PieIcon, BarChart3, 
-  ArrowUpRight, ArrowDownLeft, Calendar, 
+  ArrowUpRight, ArrowDownLeft, 
   ShoppingBag, Target 
 } from "lucide-react";
 

@@ -7,7 +7,7 @@ import {
   RefreshCcw,
   ExternalLink,
   Heart,
-  LogOut,
+  // LogOut,
   Cloud,
 } from "lucide-react";
 import { signOut } from "firebase/auth";
