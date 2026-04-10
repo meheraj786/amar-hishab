@@ -71,8 +71,8 @@ function App() {
       <div
         className={
           user
-            ? "min-h-screen md:max-w-[80%] bg-[#f8fafc] pb-20 md:ml-55"
-            : "min-h-screen w-full bg-[#f8fafc]"
+            ? "min-h-screen md:max-w-[80%] bg-[#F4F2EE] pb-20 md:ml-55"
+            : "min-h-screen w-full bg-[#F4F2EE]"
         }
       >
         <Routes>

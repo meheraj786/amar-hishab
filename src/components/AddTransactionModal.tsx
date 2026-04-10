@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,10 +20,10 @@ const getLocalDate = () => {
 
 const itemSchema = z.object({
   type: z.enum(["income", "expense"]),
-  amount: z.number().min(1, "সঠিক পরিমাণ লিখুন"),
-  costPrice: z.number().optional().nullable(),
-  category: z.string().min(1, "ক্যাটাগরি সিলেক্ট করুন"),
-  notes: z.string().max(30, "সর্বোচ্চ ৩০ অক্ষর").optional(),
+  amount: z.preprocess((val) => (val === "" ? undefined : Number(val)), z.number({ invalid_type_error: "পরিমাণ লিখুন" }).min(1, "সঠিক পরিমাণ লিখুন")),
+  costPrice: z.preprocess((val) => (val === "" || val === null || val === undefined ? null : Number(val)), z.number().nullable().optional()),
+  category: z.string().min(1),
+  notes: z.string().max(30).optional(),
   date: z.string(),
 });
 
@@ -35,15 +35,15 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
   const [mode, setMode] = useState<"single" | "bulk">("single");
   const { addTransaction, updateTransaction } = useKhataStore();
 
-  const { register, handleSubmit, setValue, reset, watch, control } = useForm<any>({
+  const { register, handleSubmit, setValue, reset, watch, control, formState: { errors } } = useForm<any>({
     resolver: zodResolver(mode === "single" ? itemSchema : bulkSchema),
     defaultValues: {
       type: "income",
       date: getLocalDate(),
-      amount: undefined,
-      costPrice: undefined,
+      amount: "",
+      costPrice: "",
       category: "পণ্য বিক্রয়",
-      transactions: [{ type: "income", date: getLocalDate(), amount: undefined, costPrice: undefined, category: "পণ্য বিক্রয়", notes: "" }]
+      transactions: [{ type: "income", date: getLocalDate(), amount: "", costPrice: "", category: "পণ্য বিক্রয়", notes: "" }]
     }
   });
 
@@ -61,10 +61,10 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
       reset({
         type: "income",
         date: getLocalDate(),
-        amount: undefined,
-        costPrice: undefined,
+        amount: "",
+        costPrice: "",
         category: "পণ্য বিক্রয়",
-        transactions: [{ type: "income", date: getLocalDate(), amount: undefined, costPrice: undefined, category: "পণ্য বিক্রয়", notes: "" }]
+        transactions: [{ type: "income", date: getLocalDate(), amount: "", costPrice: "", category: "পণ্য বিক্রয়", notes: "" }]
       });
     }
   }, [editingTransaction, open, reset]);
@@ -88,7 +88,10 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px] rounded-[2.5rem] p-6 md:p-8 bg-white border-none shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
         <DialogHeader className="flex flex-row items-center justify-between mb-4">
-          <DialogTitle className="text-2xl font-black">হিসাব <span className="text-primary">{editingTransaction ? "সংশোধন" : "এন্ট্রি"}</span></DialogTitle>
+          <div>
+            <DialogTitle className="text-2xl font-black">হিসাব <span className="text-primary">{editingTransaction ? "সংশোধন" : "এন্ট্রি"}</span></DialogTitle>
+            <DialogDescription className="sr-only">লেনদেনের তথ্য এখানে ইনপুট দিন</DialogDescription>
+          </div>
           {!editingTransaction && (
             <div className="flex bg-slate-100 p-1 rounded-xl">
               <button type="button" onClick={() => setMode("single")} className={`px-3 py-1.5 rounded-lg text-[10px] font-black transition-all ${mode === "single" ? "bg-white shadow-sm text-primary" : "text-slate-400"}`}>
@@ -113,11 +116,12 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">টাকার পরিমাণ (বেচা দাম)</Label>
+                  <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">টাকার পরিমাণ {currentType === "income" ? "(বেচা দাম)" : ""}</Label>
                   <div className="relative group">
                     <Banknote className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-primary" size={24} />
-                    <Input type="number" {...register("amount", { valueAsNumber: true })} placeholder="টাকার পরিমাণ লিখুন" className="h-20 pl-14 text-4xl font-black bg-slate-50 border-none rounded-3xl outline-none" />
+                    <Input type="number" {...register("amount")} placeholder="পরিমাণ লিখুন" className="h-20 pl-14 text-4xl font-black bg-slate-50 border-none rounded-3xl outline-none" />
                   </div>
+                  {errors.amount && <p className="text-rose-500 text-xs font-bold ml-2">{errors.amount.message}</p>}
                 </div>
 
                 {currentType === "income" && (
@@ -125,10 +129,10 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
                     <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">কেনা দাম / খরচ (ঐচ্ছিক)</Label>
                     <div className="relative group">
                       <ShoppingBag className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300" size={20} />
-                      <Input type="number" {...register("costPrice", { valueAsNumber: true })} placeholder="০.০০" className="h-14 pl-14 text-xl font-bold bg-slate-50 border-none rounded-2xl outline-none" />
+                      <Input type="number" {...register("costPrice")} placeholder="০.০০" className="h-14 pl-14 text-xl font-bold bg-slate-50 border-none rounded-2xl outline-none" />
                     </div>
-                    {sellPrice > 0 && buyPrice > 0 && (
-                      <p className="text-xs font-bold text-emerald-600 ml-2">লাভ হবে: ৳{(sellPrice - buyPrice).toLocaleString()}</p>
+                    {Number(sellPrice) > 0 && Number(buyPrice) > 0 && (
+                      <p className="text-xs font-bold text-emerald-600 ml-2">লাভ হবে: ৳{(Number(sellPrice) - Number(buyPrice)).toLocaleString()}</p>
                     )}
                   </div>
                 )}
@@ -164,12 +168,12 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div className="space-y-1">
                         <Label className="text-[9px] font-black uppercase text-slate-400 ml-1">পরিমাণ (বেচা দাম)</Label>
-                        <Input type="number" {...register(`transactions.${index}.amount`, { valueAsNumber: true })} placeholder="টাকা" className="h-12 font-black rounded-xl border-none bg-white shadow-sm" />
+                        <Input type="number" {...register(`transactions.${index}.amount`)} placeholder="টাকা" className="h-12 font-black rounded-xl border-none bg-white shadow-sm" />
                       </div>
                       {rowType === "income" && (
                         <div className="space-y-1">
                           <Label className="text-[9px] font-black uppercase text-slate-400 ml-1">কেনা দাম (ঐচ্ছিক)</Label>
-                          <Input type="number" {...register(`transactions.${index}.costPrice`, { valueAsNumber: true })} placeholder="খরচ" className="h-12 font-bold rounded-xl border-none bg-white shadow-sm" />
+                          <Input type="number" {...register(`transactions.${index}.costPrice`)} placeholder="খরচ" className="h-12 font-bold rounded-xl border-none bg-white shadow-sm" />
                         </div>
                       )}
                     </div>
@@ -190,8 +194,8 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
                         <Input type="date" {...register(`transactions.${index}.date`)} className="h-7 text-[10px] font-bold border-none bg-transparent w-28 outline-none" />
                       </div>
                       <div className="flex items-center gap-3">
-                        {rowType === "income" && rowSell > 0 && rowBuy > 0 && (
-                          <span className="text-[10px] font-black text-emerald-600">লাভ: ৳{rowSell - rowBuy}</span>
+                        {rowType === "income" && Number(rowSell) > 0 && Number(rowBuy) > 0 && (
+                          <span className="text-[10px] font-black text-emerald-600">লাভ: ৳{Number(rowSell) - Number(rowBuy)}</span>
                         )}
                         {fields.length > 1 && (
                           <button type="button" onClick={() => remove(index)} className="text-rose-400 hover:text-rose-600 transition-colors">
@@ -204,7 +208,7 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
                 );
               })}
 
-              <button type="button" onClick={() => append({ type: "income", date: getLocalDate(), amount: undefined, costPrice: undefined, category: "পণ্য বিক্রয়", notes: "" })} className="w-full border-dashed border-2 border-slate-200 rounded-2xl h-14 text-slate-400 font-bold hover:bg-slate-50 hover:text-primary transition-all flex items-center justify-center">
+              <button type="button" onClick={() => append({ type: "income", date: getLocalDate(), amount: "", costPrice: "", category: "পণ্য বিক্রয়", notes: "" })} className="w-full border-dashed border-2 border-slate-200 rounded-2xl h-14 text-slate-400 font-bold hover:bg-slate-50 hover:text-primary transition-all flex items-center justify-center">
                 <Plus size={16} className="mr-2" /> আরও হিসাব যোগ করুন
               </button>
             </div>

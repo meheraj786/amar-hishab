@@ -24,7 +24,7 @@ export default function Home({ onAddClick }: any) {
   const todayProfit = todayTx.filter(t => t.type === "income").reduce((s, t) => s + (t.profit || 0), 0);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8 lg:p-12 pb-28">
+    <div className="min-h-screen bg-[#F4F2EE] p-4 md:p-8 lg:p-12 pb-28">
       <header className="flex justify-between items-center mb-10">
         <div className="space-y-1">
           <h1 className="text-3xl md:text-4xl font-black tracking-tighter">আমার<span className="text-primary">হিসাব</span></h1>

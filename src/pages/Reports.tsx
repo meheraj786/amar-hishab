@@ -90,7 +90,7 @@ export default function Reports() {
   const COLORS = ["#10b981", "#3b82f6", "#f59e0b", "#6366f1", "#f43f5e", "#ec4899", "#8b5cf6"];
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] p-4 md:p-8 lg:p-12 pb-24">
+    <div className="min-h-screen bg-[#F4F2EE] p-4 md:p-8 lg:p-12 pb-24">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
         <div className="space-y-1">
           <h1 className="text-4xl font-black">হিসাব <span className="text-primary">বিশ্লেষণ</span></h1>

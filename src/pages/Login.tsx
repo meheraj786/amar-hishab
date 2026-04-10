@@ -55,11 +55,11 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#F4F2EE] p-4">
       <div className="max-w-md w-full bg-white rounded-[2.5rem] p-10 shadow-xl shadow-slate-200/50">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-            স্বাগতম <span className="text-emerald-600">খাতায়</span>
+            স্বাগতম <span className="text-primary">হিসেবে</span>
           </h1>
           <p className="text-slate-500 font-semibold mt-2">
             আপনার হিসেবে প্রবেশ করুন
@@ -92,7 +92,7 @@ export default function Login() {
             <Input
               type={showPassword ? "text" : "password"} 
               placeholder="পাসওয়ার্ড"
-              className="pl-12 pr-12 h-14 rounded-2xl bg-slate-50 border-none font-semibold transition-all focus:ring-2 focus:ring-emerald-500/20"
+              className="pl-12 pr-12 h-14 rounded-2xl bg-slate-50 border-none font-semibold transition-all focus:ring-2 focus:ring-primary/20"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required={!loading}
@@ -102,7 +102,7 @@ export default function Login() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 transition-colors p-1"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors p-1"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -113,7 +113,7 @@ export default function Login() {
             <button
               type="button"
               onClick={handleForgotPassword}
-              className="text-xs font-bold text-slate-400 hover:text-emerald-600 transition-colors"
+              className="text-xs font-bold text-slate-400 hover:text-primary transition-colors"
             >
               পাসওয়ার্ড ভুলে গেছেন?
             </button>
@@ -125,14 +125,14 @@ export default function Login() {
             </p>
           )}
           {message && (
-            <p className="text-emerald-600 text-xs font-bold text-center bg-emerald-50 p-3 rounded-xl">
+            <p className="text-primary text-xs font-bold text-center bg-emerald-50 p-3 rounded-xl">
               {message}
             </p>
           )}
 
           <Button
             disabled={loading}
-            className="w-full h-14 rounded-2xl bg-emerald-600 hover:bg-emerald-700 font-bold text-lg shadow-lg shadow-emerald-100 transition-all active:scale-95"
+            className="w-full h-14 rounded-2xl bg-primary hover:bg-emerald-700 font-bold text-lg shadow-lg shadow-emerald-100 transition-all active:scale-95"
           >
             {loading ? (
               <Loader2 className="mr-2 animate-spin" size={20} />
@@ -148,7 +148,7 @@ export default function Login() {
             নতুন ইউজার?{" "}
             <Link
               to="/signup"
-              className="text-emerald-600 font-bold hover:underline"
+              className="text-primary font-bold hover:underline"
             >
               অ্যাকাউন্ট তৈরি করুন
             </Link>

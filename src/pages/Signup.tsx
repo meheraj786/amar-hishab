@@ -64,11 +64,11 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#F4F2EE] p-4">
       <div className="max-w-md w-full bg-white rounded-[2.5rem] p-10 shadow-xl shadow-slate-200/50">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-            নতুন <span className="text-emerald-600">অ্যাকাউন্ট</span>
+            নতুন <span className="text-primary">অ্যাকাউন্ট</span>
           </h1>
           <p className="text-slate-500 font-semibold mt-2">
             আপনার তথ্য দিয়ে শুরু করুন
@@ -120,7 +120,7 @@ export default function Signup() {
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="পাসওয়ার্ড"
-                className="pl-12 pr-12 h-14 rounded-2xl bg-slate-50 border-none font-semibold transition-all focus:ring-2 focus:ring-emerald-500/20"
+                className="pl-12 pr-12 h-14 rounded-2xl bg-slate-50 border-none font-semibold transition-all focus:ring-2 focus:ring-primary/20"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -129,7 +129,7 @@ export default function Signup() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 transition-colors p-1"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors p-1"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -142,7 +142,7 @@ export default function Signup() {
             </p>
           )}
 
-          <Button className="w-full h-14 rounded-2xl bg-emerald-600 hover:bg-emerald-700 font-bold text-lg shadow-lg shadow-emerald-100 mt-4">
+          <Button className="w-full h-14 rounded-2xl bg-primary hover:bg-emerald-700 font-bold text-lg shadow-lg shadow-emerald-100 mt-4">
             <UserPlus className="mr-2" size={20} /> সাইন আপ করুন
           </Button>
         </form>
@@ -152,7 +152,7 @@ export default function Signup() {
             ইতিমধ্যেই অ্যাকাউন্ট আছে?{" "}
             <Link
               to="/login"
-              className="text-emerald-600 font-bold hover:underline"
+              className="text-primary font-bold hover:underline"
             >
               লগইন করুন
             </Link>

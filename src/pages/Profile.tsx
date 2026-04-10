@@ -59,13 +59,13 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] p-4 md:p-12 pb-32">
+    <div className="min-h-screen bg-[#F4F2EE] p-4 md:p-12 pb-32">
       <div className="max-w-2xl mx-auto space-y-8">
         
         {/* Header Section */}
         <div className="text-center md:text-left">
           <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-            আমার <span className="text-emerald-600">প্রোফাইল</span>
+            আমার <span className="text-primary">প্রোফাইল</span>
           </h1>
           <p className="text-slate-500 font-semibold mt-2">আপনার ব্যক্তিগত তথ্য এবং হিসাবের তথ্য</p>
         </div>
@@ -77,7 +77,7 @@ export default function Profile() {
           <div className="relative z-10 flex flex-col items-center md:items-start gap-8">
             {/* Avatar Initials */}
             <div className="relative group">
-              <div className="w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl flex items-center justify-center text-white text-3xl font-black shadow-lg shadow-emerald-200">
+              <div className="w-24 h-24 bg-gradient-to-br from-primary to-teal-600 rounded-3xl flex items-center justify-center text-white text-3xl font-black shadow-lg shadow-primary">
                 {user?.displayName?.charAt(0).toUpperCase() || "U"}
               </div>
             </div>

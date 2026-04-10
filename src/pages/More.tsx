@@ -31,11 +31,11 @@ export default function More() {
   // };
 
   return (
-    <div className="min-h-screen w-full bg-[#fcfdfe] transition-colors duration-300">
+    <div className="min-h-screen w-full bg-[#F4F2EE] transition-colors duration-300">
       <div className="max-w-full mx-auto p-5 md:p-12 pb-32">
         <div className="mb-12 text-center md:text-left space-y-2">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
-            আরও <span className="text-emerald-600">অপশন</span>
+            আরও <span className="text-primary">অপশন</span>
           </h1>
           <p className="text-slate-500 font-semibold text-lg">
             অ্যাপ সেটিংস এবং তথ্য
@@ -48,12 +48,12 @@ export default function More() {
             <CardContent className="p-8 md:p-10 space-y-8">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex items-center gap-5">
-                  <div className="w-14 h-14 bg-emerald-50 rounded-[1.25rem] flex items-center justify-center text-emerald-600 shadow-inner">
+                  <div className="w-14 h-14 bg-emerald-50 rounded-[1.25rem] flex items-center justify-center text-primary shadow-inner">
                     <Info size={28} />
                   </div>
                   <div>
                     <h3 className="font-bold text-2xl text-slate-900 leading-tight">
-                      আমার<span className="text-emerald-600">হিসাব</span>
+                      আমার<span className="text-primary">হিসাব</span>
                     </h3>
                     <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1 font-mono">
                       Version 2.0 • Stable
@@ -62,7 +62,7 @@ export default function More() {
                 </div>
                 {/* Optional: Add a subtle badge */}
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-full border border-slate-100">
-                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                   <span className="text-xs font-bold text-slate-600 tracking-wide">
                     সিস্টেম সচল আছে
                   </span>
@@ -85,7 +85,7 @@ export default function More() {
   <div className="group flex gap-4 p-6 bg-slate-50 hover:bg-emerald-50/50 transition-colors rounded-[2rem] border border-slate-100/50">
     <RefreshCcw
       size={24}
-      className="text-emerald-500 shrink-0 group-hover:scale-110 transition-transform"
+      className="text-primary shrink-0 group-hover:scale-110 transition-transform"
     />
     <p className="text-sm font-medium text-slate-600 leading-relaxed">
       <strong>অফলাইনেও</strong> নিশ্চিন্তে ব্যবহার করুন, অনলাইন হওয়া মাত্রই ডেটা স্বয়ংক্রিয়ভাবে সিঙ্ক হবে।
@@ -95,12 +95,12 @@ export default function More() {
             </CardContent>
           </Card>
 
-          <div className="p-[2px] bg-gradient-to-r from-emerald-100 via-emerald-600 to-emerald-100 rounded-[2.6rem] shadow-xl shadow-emerald-100/50">
+          <div className="p-[2px] bg-gradient-to-r from-emerald-100 via-primary to-emerald-100 rounded-[2.6rem] shadow-xl shadow-emerald-100/50">
             <div className="bg-white rounded-[2.5rem] p-8">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-emerald-50 rounded-lg">
-                    <Smartphone className="text-emerald-600" size={20} />
+                    <Smartphone className="text-primary" size={20} />
                   </div>
                   <span className="font-bold text-slate-900 uppercase tracking-tighter text-lg">
                     সিস্টেম ইন্সটলেশন
@@ -158,7 +158,7 @@ export default function More() {
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.5em]">
               Developed By{" "}
               <a
-                className="text-emerald-500 font-black"
+                className="text-primary font-black"
                 href="https://github.com/meheraj786"
               >
                 Meheraj
