@@ -58,7 +58,7 @@ function App() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-        <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
         <p className="font-bold text-slate-500 italic">
           আমার খাতা লোড হচ্ছে...
         </p>
