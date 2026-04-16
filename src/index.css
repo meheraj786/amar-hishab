@@ -60,13 +60,13 @@
   --color-secondary: oklch(57.586% 0.11907 242.306);
 }
 
-#root {
+/* #root {
   width: 100%;
   margin: 0 auto;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-}
+} */
 
 h1,
 h2,
