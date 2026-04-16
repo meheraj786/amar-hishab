@@ -30,35 +30,91 @@ function App() {
     let unsubDue = () => {};
 
     if (user) {
-      const qTx = query(collection(db, "users", user.uid, "transactions"), orderBy("createdAt", "desc"));
+      const qTx = query(
+        collection(db, "users", user.uid, "transactions"),
+        orderBy("createdAt", "desc"),
+      );
       unsubTx = onSnapshot(qTx, (snap) => {
-        setTransactions(snap.docs.map(d => ({ id: d.id, ...d.data() })) as any);
+        setTransactions(
+          snap.docs.map((d) => ({ id: d.id, ...d.data() })) as any,
+        );
       });
 
-      const qDue = query(collection(db, "users", user.uid, "dues"), orderBy("createdAt", "desc"));
+      const qDue = query(
+        collection(db, "users", user.uid, "dues"),
+        orderBy("createdAt", "desc"),
+      );
       unsubDue = onSnapshot(qDue, (snap) => {
-        setDues(snap.docs.map(d => ({ id: d.id, ...d.data() })) as any);
+        setDues(snap.docs.map((d) => ({ id: d.id, ...d.data() })) as any);
       });
     }
 
-    return () => { unsubTx(); unsubDue(); };
+    return () => {
+      unsubTx();
+      unsubDue();
+    };
   }, [user]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center bg-white">লোড হচ্ছে...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-white">
+        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="font-bold text-slate-500 italic">
+          আমার খাতা লোড হচ্ছে...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <Router>
-      <div className={user ? "min-h-screen md:flex-1 bg-[#F4F2EE] pb-20 md:ml-55" : "min-h-screen w-full bg-[#F4F2EE]"}>
+      <div
+        className={
+          user
+            ? "min-h-screen md:flex-1 bg-[#F4F2EE] pb-20 md:ml-55"
+            : "min-h-screen w-full bg-[#F4F2EE]"
+        }
+      >
         <BusinessCalculator />
         <Routes>
-          <Route path="/" element={user ? <Home onAddClick={() => setModalOpen(true)} /> : <Navigate to="/login" />} />
-          <Route path="/transactions" element={user ? <Transactions /> : <Navigate to="/login" />} />
-          <Route path="/dues" element={user ? <Dues /> : <Navigate to="/login" />} />
-          <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
-          <Route path="/reports" element={user ? <Reports /> : <Navigate to="/login" />} />
-          <Route path="/more" element={user ? <More /> : <Navigate to="/login" />} />
-          <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
-          <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
+          <Route
+            path="/"
+            element={
+              user ? (
+                <Home onAddClick={() => setModalOpen(true)} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/transactions"
+            element={user ? <Transactions /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/dues"
+            element={user ? <Dues /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={user ? <Profile /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/reports"
+            element={user ? <Reports /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/more"
+            element={user ? <More /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/signup"
+            element={!user ? <Signup /> : <Navigate to="/" />}
+          />
         </Routes>
         {user && (
           <>
