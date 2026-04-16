@@ -24,7 +24,6 @@ import {
   Plus,
   Trash2,
   Phone,
-  Wallet,
 } from "lucide-react";
 
 const getLocalDate = () => {

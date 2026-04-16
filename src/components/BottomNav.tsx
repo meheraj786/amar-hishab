@@ -1,4 +1,4 @@
-import { Home, List, BarChart3, MoreHorizontal, User, ScrollText } from 'lucide-react';
+import { Home, List, BarChart3, MoreHorizontal, ScrollText, User } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 const navItems = [
@@ -6,6 +6,7 @@ const navItems = [
   { to: '/transactions', icon: List, label: 'খাতা' },
   { to: '/dues', icon: ScrollText, label: 'বাকি' },
   { to: '/reports', icon: BarChart3, label: 'রিপোর্ট' },
+  { to: '/profile', icon: User, label: 'প্রোফাইল' },
   { to: '/more', icon: MoreHorizontal, label: 'আরও' },
 ];
 
