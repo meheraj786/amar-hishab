@@ -10,11 +10,16 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'], 
       manifest: {
         name: 'Amar Khata',
-        short_name: 'Amar-Khata',
+        short_name: 'AmarKhata', 
         description: 'সহজে আয়-ব্যয় ট্র্যাক করুন',
         theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'standalone', 
+        start_url: '/',
+        orientation: 'portrait',
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -25,8 +30,17 @@ export default defineConfig({
             src: 'pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable' 
           }
         ]
+      },
+      devOptions: {
+        enabled: true 
       }
     })
   ],
@@ -36,5 +50,3 @@ export default defineConfig({
     },
   },
 })
-
-
