@@ -7,6 +7,7 @@ const navItems = [
   { to: '/dues', icon: ScrollText, label: 'বাকি' },
   { to: '/reports', icon: BarChart3, label: 'রিপোর্ট' },
   { to: '/profile', icon: User, label: 'প্রোফাইল' },
+  { to: '/invoice', icon: BarChart3, label: 'বিল' },
   { to: '/more', icon: MoreHorizontal, label: 'আরও' },
 ];
 

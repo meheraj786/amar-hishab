@@ -15,6 +15,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Dues from "./pages/Dues";
 import BusinessCalculator from "./components/BusinessCalculator";
+import InvoiceGenerator from "./pages/InvoiceGenerator";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -114,6 +115,10 @@ function App() {
           <Route
             path="/signup"
             element={!user ? <Signup /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/invoice"
+            element={user ? <InvoiceGenerator /> : <Navigate to="/login" />}
           />
         </Routes>
         {user && (

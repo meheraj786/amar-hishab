@@ -102,10 +102,10 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
     }
   }, [editingTransaction, open, reset]);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = (data: any) => {
     if (mode === "single") {
       if (data.isDue && data.type === 'income') {
-        await addDue({
+        addDue({
           customerName: data.customerName || "অজানা",
           customerPhone: data.customerPhone || "",
           totalAmount: data.amount,
@@ -115,12 +115,16 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
           notes: data.notes
         });
       } else {
-        editingTransaction ? await updateTransaction(editingTransaction.id, data) : await addTransaction(data);
+        if (editingTransaction) {
+          updateTransaction(editingTransaction.id, data);
+        } else {
+          addTransaction(data);
+        }
       }
     } else {
-      for (const tx of data.transactions) {
+      data.transactions.forEach((tx: any) => {
         if (tx.isDue && tx.type === 'income') {
-          await addDue({
+          addDue({
             customerName: tx.customerName || "অজানা",
             customerPhone: tx.customerPhone || "",
             totalAmount: tx.amount,
@@ -130,11 +134,11 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
             notes: tx.notes
           });
         } else {
-          await addTransaction(tx);
+          addTransaction(tx);
         }
-      }
+      });
     }
-    onOpenChange(false);
+    onOpenChange(false); 
   };
 
   return (
@@ -178,7 +182,7 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
                 </div>
 
                 {currentType === "income" && (
-                  <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-2xl border border-primary/10">
+                  <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-2xl border border-primary/10 transition-all">
                     <input type="checkbox" {...register("isDue")} id="due-check" className="w-5 h-5 accent-primary rounded cursor-pointer" />
                     <Label htmlFor="due-check" className="font-bold text-primary cursor-pointer">এটি কি বাকি বিক্রয়?</Label>
                   </div>
@@ -220,13 +224,13 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">ক্যাটাগরি</Label>
-                  <select {...register("category")} className="w-full h-14 px-4 font-bold bg-slate-50 rounded-2xl border-none outline-none">
+                  <select {...register("category")} className="w-full h-14 px-4 font-bold bg-slate-50 rounded-2xl border-none outline-none cursor-pointer">
                     {(popularCategories as any)[currentType].map((c: string) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
                   <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">তারিখ</Label>
-                  <Input type="date" {...register("date")} className="h-14 font-bold bg-slate-50 border-none rounded-2xl outline-none" />
+                  <Input type="date" {...register("date")} className="h-14 font-bold bg-slate-50 border-none rounded-2xl outline-none cursor-pointer" />
                 </div>
               </div>
 
@@ -261,7 +265,7 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
                     {rowType === "income" && (
                       <div className="flex flex-col gap-3 p-3 bg-white rounded-2xl shadow-sm">
                         <div className="flex items-center gap-2">
-                          <input type="checkbox" {...register(`transactions.${index}.isDue`)} className="w-4 h-4 accent-primary rounded" />
+                          <input type="checkbox" {...register(`transactions.${index}.isDue`)} className="w-4 h-4 accent-primary rounded cursor-pointer" />
                           <span className="text-xs font-black text-primary uppercase">বাকি বিক্রয়?</span>
                         </div>
                         {rowIsDue && (
@@ -274,7 +278,7 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
                     )}
 
                     <div className="grid grid-cols-2 gap-3">
-                      <select {...register(`transactions.${index}.category`)} className="h-12 px-3 font-bold rounded-xl border-none bg-white shadow-sm text-xs outline-none">
+                      <select {...register(`transactions.${index}.category`)} className="h-12 px-3 font-bold rounded-xl border-none bg-white shadow-sm text-xs outline-none cursor-pointer">
                         {(popularCategories as any)[rowType].map((cat: string) => <option key={cat} value={cat}>{cat}</option>)}
                       </select>
                       <Input placeholder="নোট..." {...register(`transactions.${index}.notes`)} className="h-12 font-semibold rounded-xl border-none bg-white shadow-sm text-xs outline-none" />
@@ -282,11 +286,11 @@ export default function AddTransactionModal({ open, onOpenChange, editingTransac
 
                     <div className="flex items-center justify-between px-1">
                       <div className="flex gap-2">
-                        <select {...register(`transactions.${index}.type`)} className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg border-none outline-none ${rowType === "income" ? "bg-emerald-100 text-emerald-600" : "bg-rose-100 text-rose-600"}`}>
+                        <select {...register(`transactions.${index}.type`)} className={`text-[10px] font-black uppercase px-2 py-1 rounded-lg border-none outline-none cursor-pointer ${rowType === "income" ? "bg-emerald-100 text-emerald-600" : "bg-rose-100 text-rose-600"}`}>
                           <option value="income">বিক্রয়</option>
                           <option value="expense">খরচ</option>
                         </select>
-                        <Input type="date" {...register(`transactions.${index}.date`)} className="h-7 text-[10px] font-bold border-none bg-transparent w-28 outline-none" />
+                        <Input type="date" {...register(`transactions.${index}.date`)} className="h-7 text-[10px] font-bold border-none bg-transparent w-28 outline-none cursor-pointer" />
                       </div>
                       <div className="flex items-center gap-3">
                         {rowType === "income" && Number(rowSell) > 0 && Number(rowBuy) > 0 && (
