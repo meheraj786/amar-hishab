@@ -281,7 +281,7 @@ export default function Transactions() {
                                 <div className="flex items-center gap-2 mt-1">
                                   <p className="text-xs font-bold text-slate-400 italic">{tx.notes || "কোনো নোট নেই"}</p>
                                   {tx.type === "income" && tx.profit! > 0 && (
-                                    <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 text-[12px] font-black rounded-full shadow-sm">লাভ: ৳{tx.profit}</span>
+                                    <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 text-[12px] font-black rounded-full shadow-sm">লাভ: ৳{tx.profit.toLocaleString("bn-BD")}</span>
                                   )}
                                 </div>
                               </div>

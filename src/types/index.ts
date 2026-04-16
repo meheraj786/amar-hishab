@@ -7,10 +7,23 @@ export type Transaction = {
   profit?: number;
   category: string;
   notes?: string;
-  createdAt: number; 
+  createdAt: number;
+};
+
+export type Due = {
+  id: string;
+  customerName: string;
+  customerPhone: string;
+  totalAmount: number;
+  dueAmount: number;
+  costPrice: number;
+  date: string;
+  notes?: string;
+  userId: string;
+  createdAt: number;
 };
 
 export const popularCategories = {
-  income: ['পণ্য বিক্রয়', 'সেবা বিক্রয়', 'বিনিয়োগ', 'কমিশন', 'অন্যান্য'],
+  income: ['পণ্য বিক্রয়', 'সেবা বিক্রয়', 'বিনিয়োগ', 'কমিশন', 'বাকি আদায়', 'অন্যান্য'],
   expense: ['পণ্য ক্রয়', 'দোকান ভাড়া', 'বিদ্যুৎ বিল', 'বেতন', 'পরিবহন', 'বাজার', 'অন্যান্য']
 };
