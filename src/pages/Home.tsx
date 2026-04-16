@@ -106,7 +106,7 @@ export default function Home({ onAddClick }: any) {
                     <div>
                       <h4 className="font-black text-slate-900 leading-tight">{tx.category}</h4>
                       <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                        {tx.date} {tx.type === "income" && tx.profit! > 0 && <span className="text-emerald-500 ml-1">• লাভ ৳{tx.profit}</span>}
+                        {tx.date} {tx.type === "income" && tx.profit! > 0 && <span className="text-emerald-500 ml-1">• লাভ ৳{tx?.profit?.toLocaleString("bn-BD")}</span>}
                       </p>
                     </div>
                   </div>

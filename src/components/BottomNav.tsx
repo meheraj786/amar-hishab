@@ -1,11 +1,11 @@
-import { Home, List, BarChart3, MoreHorizontal, User } from 'lucide-react';
+import { Home, List, BarChart3, MoreHorizontal, User, ScrollText } from 'lucide-react';
 import { NavLink } from 'react-router';
 
 const navItems = [
   { to: '/', icon: Home, label: 'হোম' },
   { to: '/transactions', icon: List, label: 'খাতা' },
+  { to: '/dues', icon: ScrollText, label: 'বাকি' },
   { to: '/reports', icon: BarChart3, label: 'রিপোর্ট' },
-  { to: '/profile', icon: User, label: 'প্রোফাইল' },
   { to: '/more', icon: MoreHorizontal, label: 'আরও' },
 ];
 
@@ -21,9 +21,7 @@ export default function BottomNav() {
                 to={to}
                 className={({ isActive }) =>
                   `flex flex-col items-center gap-1 py-2 px-4 rounded-2xl transition-all duration-200 ${
-                    isActive
-                      ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-105'
-                      : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600'
+                    isActive ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-105' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600'
                   }`
                 }
               >
@@ -40,10 +38,7 @@ export default function BottomNav() {
       </nav>
 
       <nav className="hidden md:flex fixed left-0 top-0 h-full w-56 flex-col z-50 bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-800">
-        <div className="px-5 py-6 mb-2">
-          <span className="text-xl font-bold text-primary tracking-tight uppercase">আমার হিসাব</span>
-        </div>
-
+        <div className="px-5 py-6 mb-2"><span className="text-xl font-bold text-primary tracking-tight uppercase">আমার হিসাব</span></div>
         <div className="flex flex-col gap-1 px-3">
           {navItems.map(({ to, icon: Icon, label }) => (
             <NavLink
@@ -51,9 +46,7 @@ export default function BottomNav() {
               to={to}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 ${
-                  isActive
-                    ? 'bg-primary/10 text-primary font-bold shadow-sm'
-                    : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 hover:text-zinc-800'
+                  isActive ? 'bg-primary/10 text-primary font-bold shadow-sm' : 'text-zinc-500 hover:bg-zinc-50 hover:text-zinc-800'
                 }`
               }
             >

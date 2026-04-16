@@ -16,8 +16,6 @@ export default function BusinessCalculator() {
     if (!display || result) return;
 
     try {
-      // Regex দিয়ে শেষ নম্বর এবং তার আগের অপারেটর বের করা হচ্ছে
-      // উদাহরণ: "1000+10" -> match: before="1000", operator="+", last="10"
       const match = display.match(/(.*?)([\+\-\*\/÷×])?([0-9.]+)$/);
       
       if (match) {
@@ -25,15 +23,12 @@ export default function BusinessCalculator() {
         const last = parseFloat(lastNum);
 
         if (!operator) {
-          // শুধু নম্বর থাকলে সরাসরি ১০০ দিয়ে ভাগ (e.g. 50% = 0.5)
           setDisplay((last / 100).toString());
         } else if (operator === "+" || operator === "-") {
-          // বিজনেস লজিক: A + B% মানে A + (A * B / 100)
           const baseValue = eval(before.replace(/×/g, "*").replace(/÷/g, "/"));
           const percentAmount = (baseValue * last) / 100;
           setDisplay(before + operator + percentAmount);
         } else {
-          // গুণ বা ভাগের ক্ষেত্রে (e.g. 500 * 10% = 500 * 0.1)
           setDisplay(before + operator + (last / 100).toString());
         }
       }
@@ -47,7 +42,6 @@ export default function BusinessCalculator() {
       if (!display) return;
       const sanitized = display.replace(/×/g, "*").replace(/÷/g, "/");
       const calc = eval(sanitized);
-      // দশমিক থাকলে ২ ঘর পর্যন্ত দেখাবে
       setResult(Number.isInteger(calc) ? calc.toString() : calc.toFixed(2));
     } catch (e) {
       setResult("Error");
