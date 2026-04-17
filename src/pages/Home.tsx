@@ -25,18 +25,18 @@ export default function Home({ onAddClick }: any) {
 
   return (
     <div className="min-h-screen bg-[#F4F2EE] p-4 md:p-8 lg:p-12 pb-28">
-      <header className="flex justify-between items-center mb-10">
+      <header className="flex justify-between items-start md:items-center mb-10">
         <div className="space-y-1">
           <h1 className="text-3xl md:text-4xl font-black tracking-tighter">আমার<span className="text-primary">হিসাব</span></h1>
           <p className="text-sm font-bold text-slate-400 flex items-center gap-2">
             <Calendar size={16} className="text-primary"/> আজ {new Date().toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" })}
           </p>
         </div>
-<div className="flex justify-end gap-x-3">
-          <button onClick={onAddClick} className="bg-primary text-white px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
+<div className="md:flex justify-end gap-3">
+          <button onClick={onAddClick} className="bg-primary mb-2 text-xs w-full md:text-xl md:mb-0 text-white px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
           <ReceiptText size={20} strokeWidth={3}/> নতুন এন্ট্রি
         </button>
-                <Link to="/invoice" className="text-primary border border-primary px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
+                <Link to="/invoice" className="text-primary text-xs md:text-xl border border-primary px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
           <Plus size={20} strokeWidth={3}/> বিল (Invoice)
         </Link>
 </div>
