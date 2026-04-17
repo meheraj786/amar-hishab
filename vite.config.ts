@@ -41,7 +41,7 @@ export default defineConfig({
             purpose: "maskable",
           },
           {
-            src: "/favicon.svg",
+            src: "/favicon.png",
             sizes: "any",
             type: "image/svg+xml",
           },
