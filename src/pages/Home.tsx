@@ -32,11 +32,11 @@ export default function Home({ onAddClick }: any) {
             <Calendar size={16} className="text-primary"/> আজ {new Date().toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" })}
           </p>
         </div>
-<div className="md:flex justify-end gap-3">
-          <button onClick={onAddClick} className="bg-primary mb-2 text-xs w-full md:text-xl md:mb-0 text-white px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
+<div className="md:flex justify-end gap-x-3">
+          <button onClick={onAddClick} className="bg-primary mb-2 text-xs w-full md:w-auto md:text-md md:mb-0 text-white px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
           <ReceiptText size={20} strokeWidth={3}/> নতুন এন্ট্রি
         </button>
-                <Link to="/invoice" className="text-primary text-xs md:text-xl border border-primary px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
+                <Link to="/invoice" className="text-primary text-xs md:text-md border border-primary px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
           <Plus size={20} strokeWidth={3}/> বিল (Invoice)
         </Link>
 </div>
