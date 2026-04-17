@@ -118,8 +118,10 @@ const InvoiceGenerator = () => {
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-2">
+                   <Label className="text-[12px] uppercase font-bold text-slate-400 ml-1">ডিসকাউন্ট (Discount)</Label>
                   <Input type="number" value={discount} onChange={(e) => setDiscount(Number(e.target.value))} placeholder="ডিসকাউন্ট ৳" className="rounded-xl bg-slate-50 border-none h-12 font-bold" />
+                   <Label className="text-[12px] uppercase font-bold text-slate-400 ml-1">জমা (Paid)</Label>
                   <Input type="number" value={paidAmount} onChange={(e) => setPaidAmount(Number(e.target.value))} placeholder="জমা ৳" className="rounded-xl bg-slate-50 border-none h-12 font-bold" />
                 </div>
 
@@ -137,7 +139,7 @@ const InvoiceGenerator = () => {
         </div>
 
         {/* Right Side: A4 Preview */}
-        <div className="lg:col-span-7 sticky top-10 hidden lg:block overflow-auto max-h-[85vh] p-6 bg-slate-200 rounded-[2.5rem] shadow-inner">
+        <div className="lg:col-span-7 sticky top-10 hidden lg:block overflow-auto max-h-[97vh] p-6 bg-slate-200 rounded-[2.5rem] shadow-inner">
           {/* A4 Paper Container */}
           <div ref={componentRef} className="bg-white mx-auto text-slate-900 font-sans shadow-2xl flex flex-col" style={{ width: '210mm', height: '297mm', padding: '15mm' }}>
             
@@ -160,17 +162,17 @@ const InvoiceGenerator = () => {
             </div>
 
             {/* Client Info */}
-            <div className="grid grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 gap-6 mb-8">
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                 <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">বিল টু (ক্রেতা):</p>
                 <h3 className="text-base font-black text-slate-900">{clientName || 'কাস্টমারের নাম'}</h3>
                 <p className="text-xs font-bold text-slate-500 mt-0.5 flex items-center gap-1.5"><Phone size={10} className="text-primary"/> {clientPhone || 'মোবাইল নম্বর নেই'}</p>
               </div>
-              <div className="flex flex-col justify-center items-end pr-4">
+              {/* <div className="flex flex-col justify-center items-end pr-4">
                 <p className="text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">মোট বকেয়া পরিমাণ</p>
                 <h3 className="text-3xl font-black text-slate-900">৳{due.toLocaleString()}</h3>
                 {dueDate && <p className="text-[10px] font-bold text-rose-500 mt-1 uppercase italic">Due Date: {dueDate}</p>}
-              </div>
+              </div> */}
             </div>
 
             {/* Table */}
@@ -229,7 +231,7 @@ const InvoiceGenerator = () => {
                     </div>
                   )}
                   <Separator className="bg-slate-100" />
-                  <div className="flex justify-between text-sm font-black text-slate-900">
+                  <div className="flex justify-between text-sm p-1 rounded-lg bg-primary text-white font-black ">
                     <span>সর্বমোট:</span>
                     <span>৳{total.toLocaleString()}</span>
                   </div>
@@ -237,7 +239,7 @@ const InvoiceGenerator = () => {
                     <span>পরিশোধিত:</span>
                     <span>৳{paidAmount.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between p-2.5 bg-slate-900 text-white rounded-xl mt-1">
+                  <div className="flex justify-between   rounded-xl mt-1">
                     <span className="text-xs font-black uppercase">বকেয়া পরিমাণ:</span>
                     <span className="text-sm font-black">৳{due.toLocaleString()}</span>
                   </div>
@@ -254,12 +256,6 @@ const InvoiceGenerator = () => {
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="pt-6 mt-4 border-t border-slate-50 text-center">
-              <p className="text-[8px] font-black text-slate-300 tracking-[0.3em] uppercase">
-                Generated via amar-hishab.vercel.app
-              </p>
             </div>
           </div>
         </div>

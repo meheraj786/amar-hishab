@@ -1,5 +1,5 @@
-import { Plus, ShoppingCart, Wallet, Calendar, History, ArrowUpRight, ArrowDownLeft, TrendingUp } from "lucide-react";
-import { useNavigate } from "react-router";
+import { Plus, ShoppingCart, Wallet, Calendar, History, ArrowUpRight, ArrowDownLeft, TrendingUp, ReceiptText } from "lucide-react";
+import { Link, useNavigate } from "react-router";
 import { useKhataStore } from "../store/useKhataStore";
 
 const getLocalDateString = () => {
@@ -32,9 +32,15 @@ export default function Home({ onAddClick }: any) {
             <Calendar size={16} className="text-primary"/> আজ {new Date().toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" })}
           </p>
         </div>
-        <button onClick={onAddClick} className="bg-primary text-white px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
-          <Plus size={20} strokeWidth={3}/> নতুন এন্ট্রি
+<div className="flex justify-end gap-x-3">
+          <button onClick={onAddClick} className="bg-primary text-white px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
+          <ReceiptText size={20} strokeWidth={3}/> নতুন এন্ট্রি
         </button>
+                <Link to="/invoice" className="text-primary border border-primary px-6 py-4 rounded-2xl font-black shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex gap-2">
+          <Plus size={20} strokeWidth={3}/> বিল (Invoice)
+        </Link>
+</div>
+
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
