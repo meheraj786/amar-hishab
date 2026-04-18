@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calculator, X, Minus, Plus, Equal, Delete, Percent, Copy, Check } from "lucide-react";
 
 export default function BusinessCalculator() {
@@ -6,6 +6,65 @@ export default function BusinessCalculator() {
   const [display, setDisplay] = useState("");
   const [result, setResult] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+
+  // ==================== KEYBOARD SUPPORT ====================
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Prevent default for some keys to avoid scrolling etc.
+      if (["Enter", "=", "+", "-", "*", "/", "%", "Backspace", "Delete"].includes(e.key)) {
+        e.preventDefault();
+      }
+
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        return;
+      }
+
+      // Numbers and Decimal
+      if (/^[0-9.]$/.test(e.key)) {
+        handleInput(e.key);
+      }
+
+      // Operators
+      else if (e.key === "+") handleInput("+");
+      else if (e.key === "-") handleInput("-");
+      else if (e.key === "*") handleInput("×");
+      else if (e.key === "/") handleInput("÷");
+
+      // Enter or = for calculate
+      else if (e.key === "Enter" || e.key === "=") {
+        calculate();
+      }
+
+      // Backspace / Delete
+      else if (e.key === "Backspace" || e.key === "Delete") {
+        if (e.key === "Delete") {
+          clear();                    // Delete key = full clear (AC)
+        } else {
+          setDisplay((prev) => prev.slice(0, -1)); // Backspace = delete last char
+        }
+      }
+
+      // Percent
+      else if (e.key === "%") {
+        handlePercent();
+      }
+
+      // Copy result with Ctrl/Cmd + C (only when result exists)
+      else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "c") {
+        if (result || display) {
+          e.preventDefault();
+          copyResult();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, display, result]); // dependencies important for latest values
+  // =========================================================
 
   const handleInput = (val: string) => {
     setResult(null);
@@ -61,6 +120,8 @@ export default function BusinessCalculator() {
     setDisplay("");
     setResult(null);
   };
+
+  // ... (বাকি সব UI কোড আগের মতোই রাখলাম)
 
   if (!isOpen) {
     return (
