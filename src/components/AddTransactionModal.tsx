@@ -307,11 +307,13 @@ export default function AddTransactionModal({
                   {...register("category")}
                   className="h-14 px-4 font-bold bg-slate-50 rounded-2xl border-none outline-none"
                 >
-                  {popularCategories[type].map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
+                  {popularCategories[type as "income" | "expense"].map(
+                    (c: string) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ),
+                  )}
                 </select>
                 <Input
                   type="date"
