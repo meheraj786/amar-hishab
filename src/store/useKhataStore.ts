@@ -49,20 +49,16 @@ export const useKhataStore = create<KhataStore>((set, get) => ({
     if (!userId) return;
     const targetDue = get().dues.find(d => d.id === dueId);
     if (!targetDue) return;
-
     const newDueAmount = targetDue.dueAmount - payAmount;
     const dueRef = doc(db, 'users', userId, 'dues', dueId);
-    
     if (newDueAmount <= 0) await deleteDoc(dueRef);
     else await updateDoc(dueRef, { dueAmount: newDueAmount });
-
     const proportionalCost = (targetDue.costPrice / targetDue.totalAmount) * payAmount;
     const proportionalYards = targetDue.yardsSold ? (targetDue.yardsSold / targetDue.totalAmount) * payAmount : 0;
-
     await addDoc(collection(db, 'users', userId, 'transactions'), {
       date: new Date().toISOString().split("T")[0],
       type: 'income',
-      amount: payAmount,
+      amount: Math.round(payAmount),
       costPrice: proportionalCost,
       profit: payAmount - proportionalCost,
       category: 'বাকি আদায়',
@@ -77,8 +73,8 @@ export const useKhataStore = create<KhataStore>((set, get) => ({
   updateTransaction: async (id, tx) => {
     const userId = auth.currentUser?.uid;
     if (!userId) return;
-    const docRef = doc(db, 'users', userId, 'transactions', id);
-    await updateDoc(docRef, tx);
+    const profit = tx.type === 'income' ? (tx.amount! - (tx.costPrice || 0)) : 0;
+    await updateDoc(doc(db, 'users', userId, 'transactions', id), { ...tx, profit });
   },
 
   deleteTransaction: async (id) => {
