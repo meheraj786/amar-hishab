@@ -12,9 +12,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "mask-icon.svg"],
       manifest: {
-        name: "Amar Hishab",
-        short_name: "AmarHishab",
-        description: "সহজে আয়-ব্যয় ট্র্যাক করুন",
+        name: "Kapor Dokan",
+        short_name: "kapor-dokan",
+        description: "কাপড় দোকান - ডিজিটাল বেচাকেনা ও মুনাফা ব্যবস্থাপনা",
         theme_color: "#008A6A",
         background_color: "#ffffff",
         display: "standalone",

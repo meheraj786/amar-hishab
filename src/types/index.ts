@@ -7,6 +7,9 @@ export type Transaction = {
   profit?: number;
   category: string;
   notes?: string;
+  paymentMethod: 'cash' | 'bank' | 'mobile';
+  yardsSold?: number;
+  pricePerYard?: number;
   createdAt: number;
 };
 
@@ -19,6 +22,9 @@ export type Due = {
   costPrice: number;
   date: string;
   notes?: string;
+  paymentMethod: 'cash' | 'bank' | 'mobile';
+  yardsSold?: number;
+  pricePerYard?: number;
   userId: string;
   createdAt: number;
 };

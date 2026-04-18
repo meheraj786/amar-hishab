@@ -63,8 +63,7 @@ export default function BusinessCalculator() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, display, result]); // dependencies important for latest values
-  // =========================================================
+  }, [isOpen, display, result]); 
 
   const handleInput = (val: string) => {
     setResult(null);
@@ -121,7 +120,6 @@ export default function BusinessCalculator() {
     setResult(null);
   };
 
-  // ... (বাকি সব UI কোড আগের মতোই রাখলাম)
 
   if (!isOpen) {
     return (

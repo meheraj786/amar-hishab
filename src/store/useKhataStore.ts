@@ -10,7 +10,7 @@ interface KhataStore {
   setDues: (dues: Due[]) => void;
   addTransaction: (tx: Omit<Transaction, 'id' | 'createdAt' | 'profit'>) => Promise<void>;
   addDue: (due: Omit<Due, 'id' | 'createdAt' | 'userId'>) => Promise<void>;
-  payDue: (dueId: string, payAmount: number) => Promise<void>;
+  payDue: (dueId: string, payAmount: number, method: 'cash' | 'bank' | 'mobile') => Promise<void>;
   updateTransaction: (id: string, tx: Partial<Transaction>) => Promise<void>;
   deleteTransaction: (id: string) => Promise<void>;
   deleteDue: (id: string) => Promise<void>;
@@ -44,7 +44,7 @@ export const useKhataStore = create<KhataStore>((set, get) => ({
     });
   },
 
-  payDue: async (dueId, payAmount) => {
+  payDue: async (dueId, payAmount, method) => {
     const userId = auth.currentUser?.uid;
     if (!userId) return;
     const targetDue = get().dues.find(d => d.id === dueId);
@@ -57,6 +57,8 @@ export const useKhataStore = create<KhataStore>((set, get) => ({
     else await updateDoc(dueRef, { dueAmount: newDueAmount });
 
     const proportionalCost = (targetDue.costPrice / targetDue.totalAmount) * payAmount;
+    const proportionalYards = targetDue.yardsSold ? (targetDue.yardsSold / targetDue.totalAmount) * payAmount : 0;
+
     await addDoc(collection(db, 'users', userId, 'transactions'), {
       date: new Date().toISOString().split("T")[0],
       type: 'income',
@@ -64,6 +66,8 @@ export const useKhataStore = create<KhataStore>((set, get) => ({
       costPrice: proportionalCost,
       profit: payAmount - proportionalCost,
       category: 'বাকি আদায়',
+      paymentMethod: method,
+      yardsSold: proportionalYards,
       notes: `${targetDue.customerName} এর বাকি পরিশোধ`,
       createdAt: Date.now(),
       userId

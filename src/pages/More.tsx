@@ -15,7 +15,7 @@ import { usePWA } from "@/hooks/usePWA";
 // import { auth } from "@/lib/firebase";
 
 export default function More() {
-  const {deferredPrompt, installApp} = usePWA();
+  const { deferredPrompt, installApp } = usePWA();
   const handleReset = () => {
     if (
       confirm(
@@ -55,7 +55,7 @@ export default function More() {
                   </div>
                   <div>
                     <h3 className="font-bold text-2xl text-slate-900 leading-tight">
-                      আমার<span className="text-primary">হিসাব</span>
+                      কাপড়<span className="text-primary">দোকান</span>
                     </h3>
                     <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1 font-mono">
                       Version 2.0 • Stable

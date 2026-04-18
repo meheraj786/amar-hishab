@@ -61,7 +61,7 @@ function App() {
       <div className="min-h-screen flex flex-col items-center justify-center bg-white">
         <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
         <p className="font-bold text-slate-500 italic">
-          আমার হিসাব লোড হচ্ছে...
+          কাপড় দোকান লোড হচ্ছে...
         </p>
       </div>
     );
@@ -76,7 +76,7 @@ function App() {
             : "min-h-screen w-full bg-[#F4F2EE]"
         }
       >
-        <BusinessCalculator />
+        {user && <BusinessCalculator />}
         <Routes>
           <Route
             path="/"
