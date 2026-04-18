@@ -26,7 +26,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
-    } catch (err: any) {
+    } catch {
       setError("ইমেইল বা পাসওয়ার্ড ভুল হয়েছে।");
     } finally {
       setLoading(false);
@@ -90,7 +90,7 @@ export default function Login() {
             />
 
             <Input
-              type={showPassword ? "text" : "password"} 
+              type={showPassword ? "text" : "password"}
               placeholder="পাসওয়ার্ড"
               className="pl-12 pr-12 h-14 rounded-2xl bg-slate-50 border-none font-semibold transition-all focus:ring-2 focus:ring-primary/20"
               value={password}

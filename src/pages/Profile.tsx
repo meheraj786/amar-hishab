@@ -35,7 +35,7 @@ export default function Profile() {
       await updateProfile(user, { displayName: name });
       setMessage({ text: "নাম সফলভাবে আপডেট হয়েছে!", type: "success" });
       setIsEditing(false);
-    } catch (err) {
+    } catch {
       setMessage({ text: "নাম আপডেট করতে সমস্যা হয়েছে।", type: "error" });
     } finally {
       setLoading(false);
@@ -50,7 +50,7 @@ export default function Profile() {
         text: "পাসওয়ার্ড রিসেট লিঙ্ক ইমেইলে পাঠানো হয়েছে।",
         type: "success",
       });
-    } catch (err) {
+    } catch {
       setMessage({ text: "সমস্যা হয়েছে, আবার চেষ্টা করুন।", type: "error" });
     }
   };

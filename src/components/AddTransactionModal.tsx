@@ -7,7 +7,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,17 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useKhataStore } from "../store/useKhataStore";
 import { popularCategories } from "../types";
-import {
-  CheckCircle2,
-  ShoppingBag,
-  Banknote,
-  Layers,
-  User,
-  Plus,
-  Trash2,
-  Phone,
-  Ruler,
-} from "lucide-react";
+import { Banknote, Plus, Trash2, Ruler } from "lucide-react";
 
 const getLocalDate = () => {
   const now = new Date();
@@ -71,24 +60,17 @@ export default function AddTransactionModal({
   const [mode, setMode] = useState<"single" | "bulk">("single");
   const { addTransaction, updateTransaction, addDue } = useKhataStore();
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-    watch,
-    control,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: zodResolver(mode === "single" ? itemSchema : bulkSchema),
-    defaultValues: {
-      type: "income",
-      date: getLocalDate(),
-      amount: "",
-      isDue: false,
-      paymentMethod: "cash",
-    },
-  });
+  const { register, handleSubmit, setValue, reset, watch, control } =
+    useForm<any>({
+      resolver: zodResolver(mode === "single" ? itemSchema : bulkSchema),
+      defaultValues: {
+        type: "income",
+        date: getLocalDate(),
+        amount: "",
+        isDue: false,
+        paymentMethod: "cash",
+      },
+    });
 
   const { fields, append, remove } = useFieldArray({
     control,
