@@ -45,7 +45,7 @@ export default function Home({ onAddClick }: any) {
       <header className="flex justify-between items-start md:items-center mb-10">
         <div className="space-y-1">
           <h1 className="text-3xl md:text-4xl font-black tracking-tighter text-slate-900">
-            কাপড়<span className="text-primary">দোকান</span>
+            কাপড় <span className="text-primary">দোকান</span>
           </h1>
           <p className="text-sm font-bold text-slate-400 flex items-center gap-2">
             <Calendar size={16} className="text-primary" /> আজ{" "}

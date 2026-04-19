@@ -51,8 +51,8 @@ export default function BottomNav() {
 
       <nav className="hidden md:flex fixed left-0 top-0 h-full w-56 flex-col z-50 bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-800">
         <div className="px-5 py-6 mb-2">
-          <span className="text-xl font-bold text-primary tracking-tight uppercase">
-            কাপড় দোকান
+          <span className="text-xl font-bold text-black tracking-tight uppercase">
+            কাপড় <span className="text-primary">দোকান</span>
           </span>
         </div>
         <div className="flex flex-col gap-1 px-3">
