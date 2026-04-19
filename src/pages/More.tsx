@@ -7,12 +7,9 @@ import {
   RefreshCcw,
   ExternalLink,
   Heart,
-  // LogOut,
   Cloud,
 } from "lucide-react";
 import { usePWA } from "@/hooks/usePWA";
-// import { signOut } from "firebase/auth";
-// import { auth } from "@/lib/firebase";
 
 export default function More() {
   const { deferredPrompt, installApp } = usePWA();
@@ -26,11 +23,6 @@ export default function More() {
       window.location.reload();
     }
   };
-  // const handleLogout = async () => {
-  //   if (confirm("আপনি কি লগআউট করতে চান?")) {
-  //     await signOut(auth);
-  //   }
-  // };
 
   return (
     <div className="min-h-screen w-full bg-[#F4F2EE] transition-colors duration-300">

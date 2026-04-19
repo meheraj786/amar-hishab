@@ -26,7 +26,6 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
 
   const totalTransactions = transactions.length;
-  // const balance = getBalance();
 
   const handleUpdateName = async () => {
     if (!user) return;
